@@ -1,0 +1,73 @@
+<table id="adminTable" class="detailsTable">
+  <tr class="header">
+    <th>Order Summary</th>
+    <th style="text-align: right"><%= link_to 'Go Back', :back %></th>
+  </tr>
+  <tr>
+    <td><strong>Order id: </strong></td>
+    <td><%= @order_summary.order_record.id %></td>
+  </tr>
+  <tr>
+    <td><strong>Confirmation Number: </strong></td>
+    <td><%= @order_summary.order_record.confirmation_number %></td>
+  </tr>
+  <tr>
+    <td><strong>Date Processed:</strong></td>
+    <td><%= @order_summary.order_record.created_at.strftime('%d %B of %Y') %></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <table class="embedded detailsTable">
+        <tr class="tableHeading">
+          <td class="rigidWidth">Product</td>
+          <td class="rigidWidth">Quantity</td>
+          <td>Price</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="padding: 0 20px">
+            <hr>
+          </td>
+        </tr>
+        <% @order_summary.ordered_products.each_with_index do |ordered_product, index| %>
+            <tr>
+              <td><%= @order_summary.products[index].product.name %></td>
+              <td><%= ordered_product.quantity %> </td>
+              <td><%= number_to_currency (@order_summary.products[index].product.price * ordered_product.quantity), precision: 2,
+                                         unit:                                                                         '&euro;', separator: ',', delimiter: ' ' %> </td>
+            </tr>
+        <% end %>
+        <tr>
+          <td colspan="3" style="padding: 0 20px">
+            <hr>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" id="deliverySurchargeCellLeft"><strong>Delivery Surcharge:</strong></td>
+          <td id="deliverySurchargeCellRight">
+            <%= number_to_currency @surcharge, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" id="totalCellLeft"><strong>Total Amount:</strong></td>
+          <td id="totalCellRight">
+            <%= number_to_currency @order_summary.order_record.amount, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="padding: 0 20px">
+      <hr>
+    </td>
+  </tr>
+  <tr class="tableRow"
+      onclick="document.location.href='<%= customer_record_path(@order_summary.customer) %>'">
+    <td colspan="2">
+      <%= link_to customer_record_path(@order_summary.customer), class: 'noDecoration' do %>
+          <strong>View Customer Details &#x279f;</strong></td>
+      <% end %>
+      </tr>
+</table>

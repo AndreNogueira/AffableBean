@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Affable Bean Green Grocer :: Admin Console</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $('tr.tableRow').hover(
+                  function () {
+                      $(this).addClass('selectedRow');
+                  },
+                  function () {
+                      $(this).removeClass('selectedRow');
+                  }
+          );
+      });
+  </script>
+</head>
+<body>
+<div id='main'>
+  <%= render 'layouts/header_admin' %>
+  <%= yield %>
+  <div id="footer"></div>
+</div>
+</body>
+</html>

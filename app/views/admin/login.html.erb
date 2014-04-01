@@ -1,0 +1,11 @@
+<%= form_tag sign_in_path do %>
+    <div id="loginBox">
+      <p><strong>Username:</strong>
+        <%= text_field_tag :username,nil, size: 20 %>
+      </p>
+      <p><strong>Password:</strong>
+        <%= password_field_tag :password,nil, size: 20 %>
+      </p>
+      <p><%= submit_tag 'Submit' %> </p>
+    </div>
+<% end %>

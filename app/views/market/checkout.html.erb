@@ -1,0 +1,104 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#checkoutForm").validate({
+            rules: {
+                "customer[name]": "required",
+                "customer[email]": {
+                    required: true,
+                    email: true
+                },
+                "customer[phone]": {
+                    required: true,
+                    number: true,
+                    minlength: 9
+                },
+                "customer[address]": {
+                    required: true
+                },
+                "customer[cc_number]": {
+                    required: true,
+                    creditcard: true
+                }
+            }
+        });
+    });
+</script>
+<div id="singleColumn">
+  <h2>Checkout</h2>
+  <p>In order to purchase the items in your shopping cart, please provide us with the following information :</p>
+  <% if flash[:error]%>
+      <p class="error"><%= flash[:error] %></p>
+  <% end %>
+
+  <%= form_for @customer, url: purchase_path, :html => { id: 'checkoutForm' } do |f| %>
+      <table id="checkoutTable">
+        <% if @customer.errors.any? %>
+            <tr>
+              <td colspan="2" style="text-align:left">
+                    <span class="error smallText">Please provide valid entries for the following field(s):
+                     <% @customer.errors.full_messages.each do |msg| %>
+                      <br><span class="indent"><strong><%= msg %></strong></span>
+                      <% end %>
+                    </span>
+              </td>
+            </tr>
+        <% end %>
+        <tr>
+          <td><%= f.label :name, 'Name : ' %></td>
+          <td class="inputField"><%= f.text_field :name, size: 31, maxlength: 45%></td>
+        </tr>
+        <tr>
+          <td><%= f.label :email, 'E-mail : ' %></td>
+          <td class="inputField"><%= f.email_field :email, size: 31, maxlength: 45 %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :phone, 'Phone : ' %></td>
+          <td class="inputField"><%= f.phone_field :phone, size: 31, maxlength: 16 %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :address, 'Address : ' %></td>
+          <td class="inputField">
+            <%= f.text_field :address, size: 31, maxlength: 45 %>
+            <br>
+            <%= f.label :city_region, 'Prague :' %><%= f.select :city_region, 1..10 %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.label :cc_number, 'Credit Card Number :' %></td>
+          <td class="inputField"><%= f.text_field :cc_number, size: 31, maxlength: 19, class: 'creditcard'%>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= f.submit 'Submit Purchase' %></td>
+        </tr>
+      </table>
+  <% end %>
+  <div id="infoBox">
+    <ul>
+      <li>Next-day delivery is guaranteed</li>
+      <li>A <%= number_to_currency @surcharge, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+        delivery surcharge is applied to all purchase orders
+      </li>
+    </ul>
+    <table id="priceBox">
+      <tr>
+        <td> SubTotal :</td>
+        <td class="checkoutPriceColumn">
+          <%= number_to_currency session[:cart].subtotal, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+        </td>
+      </tr>
+      <tr>
+        <td> Surcharge :</td>
+        <td class="checkoutPriceColumn">
+          <%= number_to_currency @surcharge, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="total"> Total :</td>
+        <td class="total checkoutPriceColumn">
+          <%= number_to_currency session[:cart].total, precision: 2, unit: '&euro;', separator: ',', delimiter: ' ' %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

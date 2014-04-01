@@ -1,0 +1,22 @@
+<div id="indexLeftColumn">
+  <div id="welcomeText">
+    <p style="font-size: larger">Welcome to the online home of the Affable Bean Green Grocer.</p>
+    <p>Enjoy browsing and learning more about our unique home delivery
+      service bringing you fresh organic produce, dairy, meats, breads
+      and other delicious and healthy items to your doorstep.</p>
+  </div>
+</div>
+
+<div id="indexRightColumn">
+  <div id="indexRightColumn">
+    <% @categories.each do |category| %>
+        <div class="categoryBox">
+          <%= link_to category_path(category), id: 'logo' do %>
+              <span class="categoryLabel"></span>
+              <span class="categoryLabelText"><%= category.name %></span>
+              <%= image_tag 'categories/' +category.name+'.jpg' , alt: category.name, class: 'categoryImage' %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>

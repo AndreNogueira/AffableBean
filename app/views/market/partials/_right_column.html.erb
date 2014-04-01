@@ -1,0 +1,25 @@
+<div id="categoryRightColumn">
+  <p id="categoryTitle">[ <%= selected_category.name %> ]</p>
+  <table id="productTable">
+    <% selected_category.products.each_with_index do |product, index| %>
+        <tr class="<%= (index%2)==0 ? 'lightBlue' : 'white' %>">
+          <td>
+            <%= image_tag 'products/'+product.name+'.png', alt: product.name %>
+          </td>
+          <td>
+            <%= product.name %>
+            <br>
+            <span class="smallText"><%= product.description %></span>
+          </td>
+          <td>
+            <%= number_to_currency product.price, precision:2,unit: '&euro;', separator: ',' , delimiter: ' '%>
+          </td>
+          <td>
+            <%= form_tag add_to_cart_path(product) do %>
+                <%= submit_tag 'Add to Cart' %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

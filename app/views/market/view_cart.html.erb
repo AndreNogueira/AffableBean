@@ -1,0 +1,61 @@
+<div id="singleColumn">
+  <p>
+    <% if session[:cart] == nil || session[:cart].number_of_items == 0 %>
+        Your shopping cart is empty
+    <% else %>
+        Your shopping cart contains <%= pluralize session[:cart].number_of_items, 'item' %>
+    <% end %>
+  </p>
+
+  <div id="actionBar">
+    <%# clear cart widget --%>
+    <% if session[:cart] != nil && session[:cart].number_of_items != 0 %>
+        <%= link_to 'Clear Cart', clear_cart_path, class: 'bubble hMargin' %>
+    <% end %>
+
+    <%# continue shopping widget %>
+     <% url = (session[:category] != root_path)? category_path(session[:category]): root_path %>
+     <%= link_to 'Continue Shopping',url, class: 'bubble hMargin'%>
+
+    <%# checkout widget %>
+    <% if session[:cart] != nil && session[:cart].number_of_items != 0 %>
+        <%= link_to 'Proceed to Checkout ➟', checkout_path,class:'bubble hMargin' %>
+    <% end %>
+  </div>
+
+  <% if session[:cart] != nil && session[:cart].number_of_items != 0 %>
+      <h4 id="subtotal">
+        SubTotal:
+        <%= number_to_currency session[:cart].subtotal, precision:2 ,unit: '&euro;', separator: ',' , delimiter: ' ' %>
+      </h4>
+      <table id="cartTable">
+        <tr class="header">
+          <th>Product</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <% session[:cart].items.each_with_index do |item, index| %>
+            <tr class="<%= (index%2)==0 ? 'lightBlue' : 'white' %>">
+              <td>
+                <%= image_tag 'products/'+item.product.name+'.png', alt: item.product.name %>
+              </td>
+              <td><%= item.product.name %></td>
+              <td>
+                <%= number_to_currency item.total, precision:2 ,unit: '&euro;', separator: ',' , delimiter: ' ' %>
+                <br>
+                <span class="smallText">(
+                  <%= number_to_currency item.product.price, precision:2 ,unit: '&euro;', separator: ',' , delimiter: ' ' %>
+                  / unit )</span>
+              </td>
+              <td>
+                <%= form_tag update_cart_path(item.product) do %>
+                    <%= text_field_tag :quantity, item.quantity, size: 2, maxlength: 2, style: 'margin:5px' %>
+                    <%= submit_tag 'Update' %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+  <% end %>
+</div>

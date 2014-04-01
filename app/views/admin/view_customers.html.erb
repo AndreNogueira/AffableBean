@@ -1,0 +1,21 @@
+<table id="adminTable" class="detailsTable">
+  <tr class="header">
+    <th colspan="4">Customers</th>
+  </tr>
+  <tr class="tableHeading">
+    <td>Customer id</td>
+    <td>Name</td>
+    <td>Email</td>
+    <td>Phone</td>
+  </tr>
+  <% unless @customers.nil? %>
+      <% @customers.each_with_index do |customer, index| %>
+          <tr class="<%= (index%2) == 1 ? 'lightBlue' : 'white' %> tableRow" onclick="<%=  customer_record_path(customer) %>">
+            <td><%= link_to customer.id, customer_record_path(customer), class: 'noDecoration' %></td>
+            <td><%= link_to customer.name, customer_record_path(customer), class: 'noDecoration' %></td>
+            <td><%= link_to customer.email, customer_record_path(customer), class: 'noDecoration' %></td>
+            <td><%= link_to customer.phone, customer_record_path(customer), class: 'noDecoration' %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>

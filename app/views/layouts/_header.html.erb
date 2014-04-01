@@ -1,0 +1,26 @@
+<div id="header">
+  <div id="widgetBar">
+    <div class="headerWidget">
+      [ language toggle ]
+    </div>
+    <%# checkout widget %>
+    <div class="headerWidget">
+      <% if session[:cart] != nil && session[:cart].number_of_items != 0 %>
+          <%= link_to 'Proceed to Checkout >>', checkout_path, class: 'bubble' %>
+      <% end %>
+    </div>
+
+    <%# shopping cart widget %>
+    <div class="headerWidget" id="viewCart">
+      <% if session[:cart] != nil && session[:cart].number_of_items != 0 %>
+          <%= image_tag 'cart.gif', alt: "Shopping Cart Icon", id: 'cart' %>
+          <span class="horizontalMargin">
+        <%= (session[:cart] == nil) ? '0 items' : pluralize(session[:cart].number_of_items, 'item') %>
+      </span>
+          <%= link_to 'View Cart', view_cart_path, class: 'bubble' %>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to image_tag('logo.png', alt: 'Affable Bean logo', id: 'logo'), root_path %>
+  <%= image_tag 'logoText.png', alt: 'The Affable Bean', id: 'logoText' %>
+</div>

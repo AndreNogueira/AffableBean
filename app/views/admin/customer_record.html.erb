@@ -1,0 +1,46 @@
+<table id="adminTable" class="detailsTable">
+  <tr class="header">
+    <th>Customer Details </th>
+    <th style="text-align: right"><%= link_to 'Go Back', :back %></th>
+  </tr>
+  <tr>
+    <td style="width: 290px"><strong>Customer id:</strong></td>
+    <td><%= @customer_record.id %></td>
+  </tr>
+  <tr>
+    <td><strong>Name :</strong></td>
+    <td><%= @customer_record.name %></td>
+  </tr>
+  <tr>
+    <td><strong>E-mail :</strong></td>
+    <td><%= @customer_record.email %></td>
+  </tr>
+  <tr>
+    <td><strong>Phone :</strong></td>
+    <td><%= @customer_record.phone %></td>
+  </tr>
+  <tr>
+    <td><strong>Address :</strong></td>
+    <td><%= @customer_record.address %></td>
+  </tr>
+  <tr>
+    <td><strong>City Region :</strong></td>
+    <td><%= @customer_record.city_region %></td>
+  </tr>
+  <tr>
+    <td><strong>Credit Card Number :</strong></td>
+    <td><%= @customer_record.cc_number %></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding: 0 20px">
+      <hr>
+    </td>
+  </tr>
+
+  <tr class="tableRow" onclick="document.location.href='<%=  order_record_path(@order) %>'">
+    <td colspan="2">
+      <%= link_to order_record_path(@order), class: 'noDecoration' do %>
+          <strong>View Order Summary &#x279f;</strong>
+      <% end %>
+  </tr>
+</table>

@@ -1,0 +1,13 @@
+<div id="categoryLeftColumn">
+  <% categories.each do |category| %>
+      <% if category.name == selected_category.name %>
+          <div class="categoryButton" id="selectedCategory">
+            <span class="categoryText"><%= category.name %> </span>
+          </div>
+      <% else %>
+          <%= link_to category_path(category), class: 'categoryButton' do %>
+              <span class="categoryText"> <%= category.name %></span>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div id="header">
+  <div id="widgetBar"></div>
+  <%= link_to image_tag('logo.png', alt: 'Affable Bean logo', id: 'logo'), admin_path %>
+  <%= image_tag 'logoText.png', alt: 'The Affable Bean', id: 'logoText' %>
+</div>
+<h2>Admin Console</h2>
+<% if session[:user] != nil %>
+    <div id="adminMenu" class="alignLeft">
+      <p><%= link_to 'View All Customers', customers_path %></p>
+      <p><%= link_to 'View All Orders', orders_path %></p>
+      <p><%= link_to 'Logout', logout_path %></p>
+    </div>
+<% end %>

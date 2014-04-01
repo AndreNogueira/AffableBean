@@ -1,0 +1,22 @@
+<table id="adminTable" class="detailsTable">
+  <tr class="header">
+    <th colspan="4">Orders</th>
+  </tr>
+  <tr class="tableHeading">
+    <td>Order id</td>
+    <td>Confirmation Number</td>
+    <td>Amount</td>
+    <td>Date Created</td>
+  </tr>
+  <% unless @orders.nil? %>
+      <% @orders.each_with_index do |order, index| %>
+          <tr class="<%= (index%2) == 1 ? 'lightBlue' : 'white' %> tableRow" onclick="<%= order_record_path(order) %>">
+            <td><%= link_to order.id, order_record_path(order), class: 'noDecoration' %></td>
+            <td><%= link_to order.confirmation_number, order_record_path(order), class: 'noDecoration' %></td>
+            <td><%= link_to (number_to_currency order.amount, precision: 2, unit: '&euro;', separator: ',', delimiter: ' '),
+                            order_record_path(order), class: 'noDecoration' %></td>
+            <td><%= link_to order.created_at.strftime('%d %B of %Y'), order_record_path(order), class: 'noDecoration' %> </td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
