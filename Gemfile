@@ -40,8 +40,9 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
 end
-gem "binding_of_caller"
+
 #gem 'ruby-jmeter',"~> 2.11.2"
 #gem 'newrelic_rpm'
 #gem 'rack-mini-profiler'

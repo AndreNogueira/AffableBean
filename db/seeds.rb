@@ -8,9 +8,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-categories = Category.create([{ name: 'dairy' }, { name: 'meats' }, { name: 'bakery' }, { name: 'fruit & veg' }])
+categories = Category.create!([{ name: 'dairy' }, { name: 'meats' }, { name: 'bakery' }, { name: 'fruit & veg' }])
 
-customers = Customer.create([{ name: 'Charlie Pace', email: 'c.pace@youareeverybody.com', phone: '605434778', address: 'Široká 45', city_region: '1', cc_number: '4224311324421331' },
+customers = Customer.create!([{ name: 'Charlie Pace', email: 'c.pace@youareeverybody.com', phone: '605434778', address: 'Široká 45', city_region: '1', cc_number: '4224311324421331' },
                              { name: 'MC Hammer', email: 'hammer@hammertime.com', phone: '226884562', address: 'Ruská 11', city_region: '2', cc_number: '4321123443211234' },
                              { name: 'Karel Gott', email: 'gott@karelgott.com', phone: '224517995', address: 'Kostelní 83', city_region: '7', cc_number: '3311332222444411' },
                              { name: 'Helena Vondráčková', email: 'h.vondrackova@seznam.cz', phone: '224517995', address: 'Letohradská 18', city_region: '7', cc_number: '1111222244443333' },
@@ -27,7 +27,7 @@ customers = Customer.create([{ name: 'Charlie Pace', email: 'c.pace@youareeveryb
                              { name: 'Hugo Reyes', email: 'hurley@mrcluck.com', phone: '605449336', address: 'Žerotínova 64', city_region: '3', cc_number: '4539992043491562' }
                             ])
 
-customers_orders = CustomerOrder.create([{ amount: 16.50, customer: customers[14], confirmation_number: 285434339 },
+customers_orders = CustomerOrder.create!([{ amount: 16.50, customer: customers[14], confirmation_number: 285434339 },
                                          { amount: 16.11, customer: customers[13], confirmation_number: 428278565 },
                                          { amount: 26.00, customer: customers[12], confirmation_number: 503113888 },
                                          { amount: 17.63, customer: customers[11], confirmation_number: 916407556 },
@@ -44,7 +44,7 @@ customers_orders = CustomerOrder.create([{ amount: 16.50, customer: customers[14
                                          { amount: 10.75, customer: customers[0], confirmation_number: 247455344 }
                                         ])
 
-products = Product.create([{ name: 'milk', price: 1.70, description: 'semi skimmed (1L)', category: categories[0] },
+products = Product.create!([{ name: 'milk', price: 1.70, description: 'semi skimmed (1L)', category: categories[0] },
                            { name: 'cheese', price: 2.39, description: 'mild cheddar (330g)', category: categories[0] },
                            { name: 'butter', price: 1.09, description: 'unsalted (250g)', category: categories[0] },
                            { name: 'free range eggs', price: 1.76, description: 'medium-sized (6 eggs)', category: categories[0] },
@@ -62,7 +62,7 @@ products = Product.create([{ name: 'milk', price: 1.70, description: 'semi skimm
                            { name: 'seedless watermelon', price: 1.49, description: '250g', category: categories[3] }
                           ])
 
-ordered_products = OrderedProduct.create([{ customer_order: customers_orders[14], product: products[0], quantity: 1 },
+ordered_products = OrderedProduct.create!([{ customer_order: customers_orders[14], product: products[0], quantity: 1 },
                                           { customer_order: customers_orders[14], product: products[14], quantity: 2 },
                                           { customer_order: customers_orders[14], product: products[2], quantity: 2 },
                                           { customer_order: customers_orders[13], product: products[4], quantity: 4 },

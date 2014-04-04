@@ -29,7 +29,7 @@ class OrderManager
     order.customer            = customer
     order.amount              = cart.total
     order.confirmation_number = rand(999999999)
-    (order.save) ? order : nil
+    (order.save!) ? order : nil
   end
 
   def add_ordered_items(customer_order, cart)

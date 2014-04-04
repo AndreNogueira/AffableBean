@@ -10,20 +10,4 @@ class ApplicationController < ActionController::Base
 		@categories = Category.all
 		@surcharge  = 3.00
 	end
-
-	#protected
-	#def set_i18n_locale_from_params
-	#	if params[:locale]
-	#		if I18n.available_locales.map(&:to_s).include?(params[:locale])
-	#			I18n.locale = params[:locale]
-	#		end
-	#	end
-	#end
-	#def default_url_options
-	#	{locale: I18n.locale}
-	#end
-  private
-  def miniprofiler
-    Rack::MiniProfiler.authorize_request
-  end
 end
